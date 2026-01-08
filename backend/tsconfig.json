@@ -29,7 +29,6 @@
     "resolveJsonModule": true,
     "declaration": true,
     "sourceMap": true,
-    "types": ["node"]
   },
   "include": ["src/**/*", "drizzle.config.ts"],
   "exclude": ["node_modules", "dist"]
