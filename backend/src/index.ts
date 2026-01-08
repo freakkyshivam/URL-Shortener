@@ -8,13 +8,22 @@ import cors from 'cors'
 const app = express();
 const PORT= 8000;
 
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://short-link-two-inky.vercel.app'
+];
+
 app.use(cors({
-    origin : [
-        'http://localhost:5173',
-        'https://short-link-two-inky.vercel.app'
-    ],
-    credentials : true
-}))
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true); // curl / server-to-server
+    if (allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    callback(new Error('Not allowed by CORS'));
+  },
+  credentials: true
+}));
+
 
 app.use(express.json());
 app.use(cookieParser())

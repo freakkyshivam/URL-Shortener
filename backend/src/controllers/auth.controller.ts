@@ -49,12 +49,13 @@ export const login = async (req:Request, res:Response)=>{
 
             const token = generateToken(existingUser.id)
             
-            res.cookie("token", token,{
-                httpOnly: true,       
-                secure: false,         
-                sameSite: "strict",  
-                maxAge: 24 * 60 * 60 * 1000
-            })
+           res.cookie("token", token, {
+  httpOnly: true,
+  secure: true,
+  sameSite: "none",
+  maxAge: 24 * 60 * 60 * 1000
+})
+
 
             return res.status(200).json({success:true, msg:"Login suceessful", token})
     } catch (error : any) {
