@@ -1,10 +1,10 @@
 import { Response } from 'express'
-import { AuthRequest } from '../types/auth-request'
-import {urlShortenBodySchema } from '../validation/request.validation'
+import { AuthRequest } from '../types/auth-request.js'
+import {urlShortenBodySchema } from '../validation/request.validation.js'
 import {nanoid} from 'nanoid'
 
-import db from '../db/db'
-import { urlsTable } from '../models/url.model'
+import db from '../db/db.js'
+import { urlsTable } from '../models/url.model.js'
 import { success } from 'zod'
 import { eq, sql } from 'drizzle-orm'
 

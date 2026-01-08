@@ -1,9 +1,9 @@
-import express from 'express'
-import {userInfo} from '../controllers/user.controller'
+import express, { Router } from 'express'
+import {userInfo} from '../controllers/user.controller.js'
  
-import { getUserUrls } from '../controllers/user.controller';
+import { getUserUrls } from '../controllers/user.controller.js';
 
-const router = express.Router();
+const router: Router = express.Router();
 
 router.get('/', userInfo)
 router.get('/urls', getUserUrls)

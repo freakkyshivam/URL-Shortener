@@ -1,5 +1,5 @@
-import db from '../db/db'
-import { userTable } from '../models/user.model'
+import db from '../db/db.js'
+import { userTable } from '../models/user.model.js'
 import { eq } from 'drizzle-orm'
 
 export const getUserByEmail = async (email:string)=>{

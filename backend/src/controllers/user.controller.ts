@@ -1,8 +1,8 @@
-import db from '../db/db'
-import { userTable } from '../models/user.model'
+import db from '../db/db.js'
+import { userTable } from '../models/user.model.js'
 import { Response } from 'express'
-import { AuthRequest } from '../types/auth-request'
-import { urlsTable } from '../models/url.model'
+import { AuthRequest } from '../types/auth-request.js'
+import { urlsTable } from '../models/url.model.js'
 import { success } from 'zod'
 import { eq, sql } from 'drizzle-orm'
 

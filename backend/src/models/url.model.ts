@@ -1,6 +1,6 @@
 import { InferModel } from "drizzle-orm"
 import {pgTable,uuid,varchar,text,timestamp,integer} from "drizzle-orm/pg-core"
-import { userTable } from "./user.model"
+import { userTable } from "./user.model.js"
 export const urlsTable = pgTable('urls',{
     id: uuid().primaryKey().defaultRandom().notNull(),
 

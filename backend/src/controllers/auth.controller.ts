@@ -1,9 +1,9 @@
 import argon2 from 'argon2'
 import { Request,Response } from 'express'
-import {signupBodySchema,loginBodySchema} from '../validation/request.validation'
-import { generateToken } from '../utils/token'
-import { getUserByEmail, insertUser } from '../services/user.service'
-import { hashedPassword } from '../utils/hashedPassword'
+import {signupBodySchema,loginBodySchema} from '../validation/request.validation.js'
+import { generateToken } from '../utils/token.js'
+import { getUserByEmail, insertUser } from '../services/user.service.js'
+import { hashedPassword } from '../utils/hashedPassword.js'
 
 export const signup = async (req:Request, res:Response)=>{
     try {

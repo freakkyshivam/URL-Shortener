@@ -1,5 +1,5 @@
-import {userTable} from './user.model'
-import { urlsTable } from './url.model'
+import {userTable} from './user.model.js'
+import { urlsTable } from './url.model.js'
 export {
     userTable,
     urlsTable
