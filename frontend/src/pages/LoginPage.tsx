@@ -12,6 +12,7 @@ const LoginPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+ const BASE_URL = import.meta.env.VITE_BASE_URL
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -26,7 +27,7 @@ const LoginPage = () => {
     setError('');
 
     try {
-      const response = await axios.post('http://localhost:8000/api/auth/login', formData, {
+      const response = await axios.post(`${BASE_URL}/api/auth/login`, formData, {
         withCredentials: true,
       });
 
@@ -36,6 +37,7 @@ const LoginPage = () => {
         setError(response.data.msg || 'Login failed');
       }
     } catch (err) {
+      console.error(err)
       setError('Network error. Please try again.');
     } finally {
       setIsLoading(false);

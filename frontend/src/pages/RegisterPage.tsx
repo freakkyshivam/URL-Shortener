@@ -14,6 +14,7 @@ const RegisterPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const navigate = useNavigate();
+   const BASE_URL = import.meta.env.VITE_BASE_URL
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -30,7 +31,7 @@ const RegisterPage = () => {
     
 
     try {
-      const response = await axios.post('http://localhost:8000/api/auth/signup', formData);
+      const response = await axios.post(`${BASE_URL}/api/auth/signup`, formData);
 
       if (response.data.success) {
         navigate('/login');
