@@ -1,7 +1,15 @@
-import { Link } from 'react-router-dom';
-import { ArrowRight, Link as LinkIcon, Zap } from 'lucide-react';
+ 
+import { Link as LinkIcon, Zap } from 'lucide-react';
+import { SignedIn, SignedOut, SignInButton, SignUpButton, UserButton } from '@clerk/clerk-react';
+import { useNavigate } from 'react-router-dom';
+ 
 
 const HomePage = () => {
+
+  const navigate = useNavigate();
+
+ 
+
   return (
     <div className="min-h-screen bg-gray-900 text-white">
       {/* Header */}
@@ -12,11 +20,13 @@ const HomePage = () => {
             <span className="text-2xl font-bold text-white">ShortLink</span>
           </div>
           <div className="flex items-center space-x-4">
-            <Link to="/login" className="text-gray-300 hover:text-white">Login</Link>
-            <Link to="/register" className="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors">
-              Get Started
-            </Link>
+            
+
+            <SignedIn>
+              <UserButton />
+            </SignedIn>
           </div>
+
         </nav>
       </header>
 
@@ -32,13 +42,26 @@ const HomePage = () => {
             and share them anywhere with our powerful URL shortener.
           </p>
           <div className="flex justify-center space-x-4">
-            <Link to="/register" className="bg-indigo-600 text-white px-8 py-3 rounded-lg text-lg font-semibold hover:bg-indigo-700 transition-colors flex items-center">
-              Start Shortening
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Link>
-            <Link to="/login" className="border px-8 py-3 rounded-lg text-lg font-semibold transition-colors border-gray-600 text-gray-300 hover:bg-gray-800">
-              Sign In
-            </Link>
+            <SignedOut>
+              <SignInButton>
+                <button className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">
+                  Sign In
+                </button>
+              </SignInButton>
+
+              <SignUpButton>
+                <button className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">
+                  Sign Up
+                </button>
+              </SignUpButton>
+            </SignedOut>
+
+           <SignedIn>
+              <button onClick={()=>navigate('/dashboard')} className="bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 transition">
+                  Dashboard 
+                </button>
+            </SignedIn>
+
           </div>
         </div>
 

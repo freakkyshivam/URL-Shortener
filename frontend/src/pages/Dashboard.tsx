@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { Link as LinkIcon, Plus, LogOut, Copy, ExternalLink } from 'lucide-react';
-import axios from 'axios';
+import { Link as LinkIcon, Plus, Copy, ExternalLink } from 'lucide-react';
+import { SignedIn,  UserButton } from '@clerk/clerk-react';
+ 
+import { api } from '../lib/api';
 
 interface User {
   id: number;
@@ -41,24 +43,22 @@ const Dashboard = () => {
 
   const fetchUserInfo = async () => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/user`, {
-        withCredentials: true,
+      const response = await api.get(`/api/user`,{
+        withCredentials : true
       });
       if (response.data.id) {
         setUser(response.data);
-      } else {
-        navigate('/login');
-      }
+      }  
     } catch (err) {
       console.error(err)
-      navigate('/login');
+      
     }
   };
 
   const fetchUrls = async () => {
     try {
-      const {data} = await axios.get(`${BASE_URL}/api/user/urls`, {
-        withCredentials: true,
+      const {data} = await api.get(`/api/user/urls`,{
+        withCredentials : true
       });
       
       console.log(data);
@@ -85,7 +85,7 @@ const Dashboard = () => {
     setSuccess('');
 
     try {
-      const response = await axios.post(`${BASE_URL}/shorten`, formData, {
+      const response = await api.post(`/shorten`, formData, {
         withCredentials: true,
       });
 
@@ -104,23 +104,13 @@ const Dashboard = () => {
     }
   };
 
-  const handleLogout = async () => {
-    try {
-      await fetch(`${BASE_URL}/api/auth/logout`, {
-        method: 'POST',
-        credentials: 'include',
-      });
-    } catch (err) {
-      console.error(err)
-    }
-    navigate('/');
-  };
+ 
 
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this URL?')) return;
 
     try {
-      const response = await axios.delete(`${BASE_URL}/url/${id}`, {
+      const response = await api.delete(`/url/${id}`, {
         withCredentials: true,
       });
       if (response.data.success) {
@@ -157,19 +147,17 @@ const Dashboard = () => {
       <header className="bg-gray-800 shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center py-6">
-            <div className="flex items-center space-x-2">
+            <div
+            onClick={()=>navigate('/')}
+            className="flex items-center space-x-2 cursor-pointer">
               <LinkIcon className="h-8 w-8 text-indigo-400" />
               <span className="text-2xl font-bold text-white">ShortLink</span>
             </div>
             <div className="flex items-center space-x-4">
               <span className="text-gray-300">Welcome, {(user as User)?.firstName}!</span>
-              <button
-                onClick={handleLogout}
-                className="flex items-center text-gray-300 hover:text-white"
-              >
-                <LogOut className="h-5 w-5 mr-1" />
-                Logout
-              </button>
+               <SignedIn>
+              <UserButton />
+            </SignedIn>
             </div>
           </div>
         </div>
