@@ -28,6 +28,9 @@ app.use(cookieParser())
 app.use('/api/user',userRouter)
 app.use('/', urlsRouter)
 
+app.get("/", (req, res) => {
+  res.send("API is running");
+});
 
 app.listen(PORT,()=>{
     console.log(`Server listen at http://localhost:${PORT}`)
