@@ -51,7 +51,8 @@ const Dashboard = () => {
       }  
     } catch (err) {
       console.error(err)
-      
+    }finally{
+      setIsLoading(false);
     }
   };
 
@@ -125,7 +126,7 @@ const Dashboard = () => {
     }
   };
 
-  console.log(urls);
+ 
   
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text);
